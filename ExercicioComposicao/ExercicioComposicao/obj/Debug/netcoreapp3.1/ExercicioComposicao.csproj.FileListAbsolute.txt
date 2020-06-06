@@ -1,0 +1,13 @@
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\bin\Debug\netcoreapp3.1\ExercicioComposicao.exe
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\bin\Debug\netcoreapp3.1\ExercicioComposicao.deps.json
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\bin\Debug\netcoreapp3.1\ExercicioComposicao.runtimeconfig.json
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\bin\Debug\netcoreapp3.1\ExercicioComposicao.runtimeconfig.dev.json
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\bin\Debug\netcoreapp3.1\ExercicioComposicao.dll
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\bin\Debug\netcoreapp3.1\ExercicioComposicao.pdb
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.csprojAssemblyReference.cache
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.csproj.CoreCompileInputs.cache
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.AssemblyInfoInputs.cache
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.AssemblyInfo.cs
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.dll
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.pdb
+C:\Users\juraci\Desktop\ExercicioComposicao\ExercicioComposicao\obj\Debug\netcoreapp3.1\ExercicioComposicao.genruntimeconfig.cache
