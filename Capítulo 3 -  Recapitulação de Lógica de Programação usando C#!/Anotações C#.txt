@@ -1,0 +1,536 @@
+ANOTAÇÕES c#
+
+1º Declarar Variavel:
+primeiro tipo depois nome da variavel seguindo de "=" "valor" e por fim ;
+
+using System;
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool completo = false; --> Booleano Verdadeiro ou Falso
+            byte n1 = 126;
+            int n2 = 1000;
+            char genero = 'F';
+            char letra = '\u0041'; --> \u para indicar caracter unicode + codigo do caractere
+            float n5 = 4.5f; --> colaca-se f no final para indicar que é do tipo float
+            double n6 = 4.5;
+            string nome = "Juraci Hein";
+            object obj1 = "Alex Brown"; -->  "object" aceita tanto string quanto int
+            object obj2 = 4.5f; -->  "object" aceita tanto string quanto int
+            int t1 = int.MaxValue; --> Valor Máximo do int
+            int t2 = int.MinValue; --> Valor Minimo do int
+            sbyte t3 = sbyte.MinValue;
+            decimal t4 = decimal.MaxValue;
+           
+
+            (cw + tab tab autocompleta o Console.WriteLine)
+            Console.WriteLine(n1);
+            Console.WriteLine(n2);
+            Console.WriteLine(completo);
+            Console.WriteLine(genero);
+            Console.WriteLine(letra);
+            Console.WriteLine(n5);
+            Console.WriteLine(n6);
+            Console.WriteLine(nome);
+            Console.WriteLine(obj1);
+            Console.WriteLine(obj2);
+            Console.WriteLine(t1);
+            Console.WriteLine(t2);
+            Console.WriteLine(t3);
+            Console.WriteLine(t4);
+
+
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Ajustando casas decimais na variavel do tipo Double:
+
+	    double n1 = 10.35784;
+            Console.WriteLine(n1);
+            Console.WriteLine(n1.ToString("F2")); //--> Adicione após a variavel ".ToString("F2")" F2 para deixar 2 casas decimais. F3 deixa 3 casas decimais e assim sucecivamente 
+
+Para imprimir a variavel trocando , por . é necessario incluir outro namespace que é o "using System.Globalization;" e adicionando o FormatProvider "CultureInfo.InvariantCulture"
+ficando:
+Console.WriteLine(n1.ToString("F3", CultureInfo.InvariantCulture));
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+Iterpolação, Concatenação e PlaceHolders
+
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int idade = 32;
+            double saldo = 10.59678;
+            string nome = "Juraci Hein";
+
+            //PlaceHolders
+            Console.WriteLine("{0} tem {1} anos, e tem saldo igual a {2:f2}", nome, idade, saldo);
+
+            //Interpolação
+            Console.WriteLine($"{nome} tem {idade} anos e tem saldo igual á {saldo:f2}");
+
+            //Concatenação --> Unico que consegue trocar a , pelo .
+            Console.WriteLine(nome +" tem " + idade + " anos, e tem saldo igual a " + saldo.ToString("f2", CultureInfo.InvariantCulture) + " reais ");
+
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+1º EXERCICIO:
+Em seguida, usando os valores das variáveis, produza a
+seguinte saída na tela do console:
+Produtos:
+Computador, cujo preço é $ 2100,00
+Mesa de escritório, cujo preco é $ 650,50
+Registro: 30 anos de idade, código 5290 e gênero: M
+Medida com oito casas decimais: 53,23456700
+Arredondado (três casas decimais): 53,235
+Separador decimal invariant culture: 53.235
+
+resp:
+string produto1 = "Computador";
+            string produto2 = "Mesa de escritório";
+            byte idade = 30;
+            int codigo = 5290;
+            char genero = 'M';
+            double preco1 = 2100.0;
+            double preco2 = 650.50;
+            double medida = 53.234567;
+
+            Console.WriteLine("Produtos:");
+            Console.WriteLine($"{produto1}, cujo o preço é R$ {preco1} ");
+            Console.WriteLine($"{produto2}, cujo preço é R$ {preco2:f2}");
+            Console.WriteLine();
+            Console.WriteLine($"Registro: {idade} anos de idade, código {codigo} e genero: {genero}");
+            Console.WriteLine();
+            Console.WriteLine($"Medida com oito casas decimais: {medida:f8}");
+            Console.WriteLine($"Arrendondado (Três casas decimais): {medida:f3}");
+            Console.WriteLine("Separador decimal invariant culture: " + medida.ToString("f3", CultureInfo.InvariantCulture));
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+OPERADORES ARITIMÉTICOS
+/ divisão * Multiplicação tem procedência
+
+
+
+int n1 = 3 + 4 * 2;
+int n2 = (3 + 4) * 2;
+int n3 = 17 % 3;
+double n4 = 10.0 / 8.0;
+double a = 1.0, b = -3.0, c = -4.0;
+double delta = Math.Pow(b, 2.0) - 4.0 * a * c;
+double x1 = (-b + Math.Sqrt(delta)) / (2.0 * a); //--> Math.Sqrt (Função para realizar a raiz quadrada)
+double x2 = (-b - Math.Sqrt(delta)) / (2.0 * a);
+
+
+Console.WriteLine(n1);
+Console.WriteLine(n2);
+Console.WriteLine(n3);
+Console.WriteLine(n4);
+Console.WriteLine(delta);
+Console.WriteLine(x1);
+Console.WriteLine(x2);
+
+-----------------------------------------------------------------------------------------------------------------------------
+OPERADORES DE ATRIBUIÇÃO
+
+Operador	Exemplo		Significado
+=  		a = 10; 	a RECEBE 10
+
++= 		a += 2; 	a RECEBE a + 2;
+
+-= 		a -= 2; 	a RECEBE a - 2;
+
+*= 		a *= 2; 	a RECEBE a * 2;
+
+/= 		a /= 2; 	a RECEBE a / 2;
+	
+%= 		a %= 3; 	a RECEBE a % 3;
+
+*****
++= aceita string Exemplo:
+
+	    string s = "abc";
+            Console.WriteLine(s);
+            s += "defghij";
+            Console.WriteLine(s);
+resultado:
+abc
+abcdefghij
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+OPERADORES ARITIMÉTICOS / ATRIBUIÇÃO
+
+Operador 	Exemplo 		Significado
+++ 		a++; ou ++a; 		a = a + 1;
+-- 		a--; ou --a; 		a = a - 1;
+
+int a = 10;
+a++;
+Console.WriteLine(a);
+SAÍDA:
+11
+
+int a = 10;
+int b = a++;
+Console.WriteLine(a);
+Console.WriteLine(b);
+SAÍDA:
+11
+10
+
+int a = 10;
+int b = ++a;
+Console.WriteLine(a);
+Console.WriteLine(b);
+SAÍDA:
+11
+11
+
+-----------------------------------------------------------------------------------------------------------------------------
+ENTRADA DE DADOS (INPUT)
+Exemplo1
+	    string frase = Console.ReadLine();
+            Console.WriteLine(frase);
+
+Exemplo2
+	    string frase = Console.ReadLine();
+            Console.WriteLine("Você digitou " + frase);
+
+Exemplo3
+	    string palavra1 = Console.ReadLine();
+            string palavra2 = Console.ReadLine();
+            string palavra3 = Console.ReadLine();
+            string palavra4 = Console.ReadLine();
+
+            Console.WriteLine("Você digitou");
+            Console.WriteLine(palavra1);
+            Console.WriteLine(palavra2);
+            Console.WriteLine(palavra3);
+            Console.WriteLine(palavra4);
+
+
+Para entrar dados do tipo INT é necessario fazer a conversão com o "int.Parse"
+
+
+	    int n1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Você Digitou: ");
+            Console.WriteLine(n1);
+
+Tipo CHAR 
+	    char n1 = char.Parse(Console.ReadLine());
+            Console.WriteLine("Você Digitou: ");
+            Console.WriteLine(n1);
+
+Tipo double
+	    double n1 = double.Parse(Console.ReadLine());
+            Console.WriteLine("Você Digitou: ");
+            Console.WriteLine(n1);
+
+Se quiser trocar a , por . só usar o invariantCulture
+
+	    double n1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Você Digitou: ");
+            Console.WriteLine(n1);
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+Fatiamento de String usando SPLIT
+separa cada palavra após o espaço "s.Split(' ');"
+
+
+string s = Console.ReadLine();
+            string[] vet = s.Split(' ');
+            string um = vet[0];
+            string dois = vet[1];
+            string tres = vet[2];
+
+            Console.WriteLine(um);
+            Console.WriteLine(dois);
+            Console.WriteLine(tres);
+
+
+EXEMPLIFICANDO: Pode se trocar a variavel "s" pra colocar direto o "Console.ReadLine()"
+
+	    string[] vet = Console.ReadLine().Split(' ');
+            string um = vet[0];
+            string dois = vet[1];
+            string tres = vet[2];
+
+            Console.WriteLine(um);
+            Console.WriteLine(dois);
+            Console.WriteLine(tres);
+
+
+
+saida no console pors 2 exemplos acima:
+juraci hein silva
+juraci
+hein
+silva
+
+Outro EXEMPLO:
+
+	    string[] vet = Console.ReadLine().Split(' ');
+            string nome = vet[0];
+            char sexo = char.Parse(vet[1]);
+            int idade = int.Parse(vet[2]);
+            double altura = double.Parse(vet[3], CultureInfo.InvariantCulture);
+
+            Console.WriteLine(nome);
+            Console.WriteLine(sexo);
+            Console.WriteLine(idade);
+            Console.WriteLine(altura.ToString("f2", CultureInfo.InvariantCulture));
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+Operadores comparativos
+
+> 	maior
+< 	menor
+>= 	maior ou igual
+<= 	menor ou igual
+== 	igual
+!= 	diferente
+
+int a = 10;
+bool c1 = a < 10;
+bool c2 = a < 20;
+bool c3 = a > 10;
+bool c4 = a > 5;
+Console.WriteLine(c1);
+Console.WriteLine(c2);
+Console.WriteLine(c3);
+Console.WriteLine(c4);
+Console.WriteLine("------------");
+bool c5 = a <= 10;
+bool c6 = a >= 10;
+bool c7 = a == 10;
+bool c8 = a != 10;
+Console.WriteLine(c5);
+Console.WriteLine(c6);
+Console.WriteLine(c7);
+Console.WriteLine(c8);
+
+
+---------------------------------------------------------------------------------------------------------
+Operadores lógicos
+
+&& 	E
+|| 	OU
+! 	NÃO
+
+bool c1 = 2 > 3 || 4 != 5; // true
+bool c2 = !(2 > 3) && 4 != 5; // true
+Console.WriteLine(c1);
+Console.WriteLine(c2);
+Console.WriteLine("--------------");
+bool c3 = 10 < 5; // false
+bool c4 = c1 || c2 && c3; // true
+Console.WriteLine(c3);
+Console.WriteLine(c4);
+
+---------------------------------------------------------------------------------------------------------
+Estrutura condicional (if-else)
+
+Exemplo 1
+
+ int x = 10;
+
+            Console.WriteLine("Bom dia");
+
+            if (x < 5)
+            {
+                Console.WriteLine("Bom Tarde");
+            }
+            
+            Console.WriteLine("Bom Noite");
+
+Saida:
+Bom dia 
+Boa Noite
+
+Exemplo 2
+Descobrindo se um numero digitado é par ou impar.
+
+	    Console.WriteLine("Digite um numero: ");
+            int num = int.Parse(Console.ReadLine());
+            if (num % 2 == 0){
+                Console.WriteLine($"Você digitou {num} --> O numero digitado é par");
+            }
+            else
+            {
+                Console.WriteLine($"Você digitou {num} --> O numero digitado é impar");
+            }
+
+
+
+Exemplo 3
+
+	Console.WriteLine("Qual a hora atual?");
+	int hora = int.Parse(Console.ReadLine());
+	if (hora < 12) {
+	Console.WriteLine("Bom dia!");
+	}
+	else if (hora < 18) {
+	Console.WriteLine("Boa tarde!");
+	}
+	else {
+	Console.WriteLine("Boa noite!");
+	}
+
+
+---------------------------------------------------------------------------------------------------------
+Funções (sintaxe)
+
+Criando a função para calcular qual é o maior numero
+para criar a função "static int Maior(int a, int b, int c)"
+chamando a função "double resultado = Maior(n1, n2, n3);"
+
+
+EXEMPLO:
+Digite três números:
+5
+8
+3
+Maior = 8
+
+Console.WriteLine("Digite três números:");
+int n1 = int.Parse(Console.ReadLine());
+int n2 = int.Parse(Console.ReadLine());
+int n3 = int.Parse(Console.ReadLine());
+double resultado = Maior(n1, n2, n3);
+Console.WriteLine("Maior = " + resultado);
+
+
+
+ESCOPO DA FUNÇÃO "Maior"
+static int Maior(int a, int b, int c) {
+int m;
+if (a > b && a > c) {
+m = a;
+}
+else if (b > c) {
+m = b;
+}
+else {
+m = c;
+}
+return m;
+
+------------------------------------------------------------------------------------------------------------
+Debugging com Visual Studio
+
+• Teclas
+F9 - marcar/desmarcar breakpoint
+F5 - iniciar/continuar o debug
+F10 - executar um passo (pula função)
+F11 - executar um passo (entra na função)
+SHIFT+F11 - sair do método em execução
+SHIFT+F5 - parar debug
+
+• Janelas
+Watch (expressões personalizadas)
+Autos (expressões "interessantes" detectadas pelo Visual Studio)
+Locals (variáveis locais)
+
+
+------------------------------------------------------------------------------------------------------------
+Estrutura repetitiva while
+
+Exemplo para calcular a raiz quadrada e so sai do while quando a variavel x for menor que 0 (numero negativo)
+
+	    Console.Write("Digite um numero: ");
+            double x = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            while (x >= 0.0) { 
+                double raiz = Math.Sqrt(x);
+                Console.WriteLine(raiz.ToString("F3", CultureInfo.InvariantCulture));
+                Console.Write("Digite outro numero: ");
+                x = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            }
+            Console.WriteLine("Numero negativo");
+
+
+------------------------------------------------------------------------------------------------------------
+Estrutura repetitiva for
+Estrutura
+for ( início ; condição ; incremento) {
+comando 1
+comando 2
+}
+
+inicio --. executa somente uma vez
+condição -->  Verdadeiro executae volta, Fals pula fora
+incremento --> executa toda vez depois de voltar
+
+
+Exemplo pratico:
+Digitar um número N e depois N valores inteiros. Mostrar a soma dos N
+valores digitados.
+
+Quantos números inteiros você vai digitar? 3
+Valor #1: 10
+Valor #2: 7
+Valor #3: 8
+Soma = 25
+
+Console.Write("Quantos numeros inteiros ocê vai digitar? ");
+            int n = int.Parse(Console.ReadLine());
+
+            int soma = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                Console.Write($"Valor#{i}:");
+                int valor = int.Parse(Console.ReadLine());
+                soma += valor;
+            }
+
+            Console.WriteLine("Soma = " + soma);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

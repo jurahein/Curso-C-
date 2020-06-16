@@ -1,0 +1,482 @@
+Resolvendo um problema sem
+orientação a objetos
+
+Fazer um programa para ler as medidas dos lados de dois triângulos X e Y (suponha medidas
+válidas). Em seguida, mostrar o valor das áreas dos dois triângulos e dizer qual dos dois triângulos
+possui a maior área.
+
+
+Sem oirentação a objeto
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double xa, xb, xc, ya, yb, yc;
+            Console.WriteLine("Entre com as medidas do triangulo X: ");
+            xa = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            xb = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            xc = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            Console.WriteLine("Entre com as medidas do triagulo y: ");
+            ya = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            yb = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            yc = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double p = (xa + xb + xc) / 2.0;
+            double areax = Math.Sqrt(p * (p - xa) * (p - xb) * (p - xc));
+
+            p = (ya + yb + yc) / 2.0;
+            double areay = Math.Sqrt(p * (p - ya) * (p - yb) * (p - yc));
+
+            Console.WriteLine("Area de x = " + areax.ToString("f4", CultureInfo.InvariantCulture));
+            Console.WriteLine("Area de y = " + areay.ToString("f4", CultureInfo.InvariantCulture));
+
+
+            if (areax > areay)
+            {
+                Console.WriteLine($"A maior area é {areax}");
+            }
+            else
+            {
+                Console.WriteLine($" A maior area é {areay}");
+            }
+        }
+    }
+}
+
+
+Em orientado a objeto:
+
+Criado a classe Triangulo:
+
+
+namespace Course
+{
+    class Triangulo
+    {
+        public double A;
+        public double B;
+        public double C;
+    }
+}
+
+
+ADICIONADO NO PROGRAMA ANTIGO
+
+ 	    Triangulo x, y;
+            x = new Triangulo();
+            y = new Triangulo();
+
+
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Triangulo x, y;
+            x = new Triangulo();
+            y = new Triangulo();
+
+            Console.WriteLine("Entre com as medidas do triangulo X: ");
+            x.A = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            x.B = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            x.C = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            Console.WriteLine("Entre com as medidas do triagulo y: ");
+            y.A = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            y.B = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            y.C = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double p = (x.A + x.B + x.C) / 2.0;
+            double areax = Math.Sqrt(p * (p - x.A) * (p - x.B) * (p - x.C));
+
+            p = (y.A + y.B + y.C) / 2.0;
+            double areay = Math.Sqrt(p * (p - y.A) * (p - y.B) * (p - y.C));
+
+            Console.WriteLine("Area de x = " + areax.ToString("f4", CultureInfo.InvariantCulture));
+            Console.WriteLine("Area de y = " + areay.ToString("f4", CultureInfo.InvariantCulture));
+
+
+            if (areax > areay)
+            {
+                Console.WriteLine($"A maior area é {areax}");
+            }
+            else
+            {
+                Console.WriteLine($" A maior area é {areay}");
+            }
+        }
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Criando um método para
+obtermos os benefícios de
+reaproveitamento e delegação
+
+Usando o exemplo da classe triangulo,
+
+Criamos uma função na classe Triangulo, uma função dentro de uma classe é chamado de metodo.
+
+
+a classe agora foi adicionada o metodo:
+
+class Triangulo
+    {
+        public double A;
+        public double B;
+        public double C;
+
+        public double Area()
+        {
+            double p = (A + B + C) / 2.0;
+            double raiz = Math.Sqrt(p * (p - A) * (p - B) * (p - C));
+            return raiz;
+        }
+
+
+E o programa principal ficou:
+
+	    Triangulo x, y;
+            x = new Triangulo();
+            y = new Triangulo();
+
+            Console.WriteLine("Entre com as medidas do triangulo X: ");
+            x.A = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            x.B = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            x.C = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            Console.WriteLine("Entre com as medidas do triagulo y: ");
+            y.A = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            y.B = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            y.C = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double areax = x.Area();
+            double areay = y.Area();
+
+
+            Console.WriteLine("Area de x = " + areax.ToString("f4", CultureInfo.InvariantCulture));
+            Console.WriteLine("Area de y = " + areay.ToString("f4", CultureInfo.InvariantCulture));
+
+
+            if (areax > areay)
+            {
+                Console.WriteLine($"A maior area é {areax}");
+            }
+            else
+            {
+                Console.WriteLine($" A maior area é {areay}");
+            }
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Resolvendo 2º Problema!!
+Fazer um programa para ler os dados de um produto em estoque (nome, preço e
+quantidade no estoque). Em seguida:
+• Mostrar os dados do produto (nome, preço, quantidade no estoque, valor total no
+estoque)
+• Realizar uma entrada no estoque e mostrar novamente os dados do produto
+• Realizar uma saída no estoque e mostrar novamente os dados do produto
+
+
+Criado a classe Produto:
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+namespace Course
+{
+    class Produto
+    {
+        public string Nome;
+        public double Preco;
+        public int Quantidade;
+
+
+        public double ValorTotalEmEstoque()
+        {
+            return Preco * Quantidade;
+        }
+
+        public void AdicionarProdutos(int quantidade)
+        {
+            Quantidade = Quantidade + quantidade;
+        }
+
+
+        public void RemoverProdutos(int quantidade)
+        {
+            Quantidade = Quantidade - quantidade;
+        }
+
+        public override string ToString()
+        {
+            return Nome + ", $ " + Preco.ToString("f2", CultureInfo.InvariantCulture) + ", " + Quantidade + " unidades, Total: $ " + ValorTotalEmEstoque().ToString("f2", CultureInfo.InvariantCulture);
+        }
+    }
+}
+
+Programa principal:
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Produto p;
+            p = new Produto();
+            
+            Console.WriteLine("Entre com os dados do produto: ");
+            Console.Write("Nome: ");
+            p.Nome = Console.ReadLine();
+            Console.Write("Preço: ");
+            p.Preco = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.Write("Quantidade no estoque: ");
+            p.Quantidade = int.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            Console.WriteLine("Dados do Produto " + p );
+            
+            Console.WriteLine();
+            Console.Write("Digite o número de produtos a ser adicionados ao estoque: ");
+            int qte = int.Parse(Console.ReadLine());
+            p.AdicionarProdutos(qte);
+            Console.WriteLine();
+            Console.WriteLine("Dados atualizados: " + p); // na classe Produto ja esta formatado a concatenação para iprimir "public override string ToString()"
+            Console.WriteLine();
+            Console.Write("Digite o número de produtos a ser Removidos do estoque: ");
+            qte = int.Parse(Console.ReadLine());
+            p.RemoverProdutos(qte);
+            Console.WriteLine();
+            Console.WriteLine("Dados atualizados: " + p);
+
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Membros estáticos
+
+Solução 1 :
+Com funções auxiliares statico dentro da classe peincipal
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            Console.WriteLine("ENTRE COM O VALOR DO RAIO:");
+            double raio = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double cir = Circunferencia(raio);
+
+            Console.WriteLine("Circunferencia: " + cir.ToString("f2", CultureInfo.InvariantCulture));
+            double volume = Volume(raio);
+            Console.WriteLine("Volume: " + volume.ToString("f2", CultureInfo.InvariantCulture));
+            Console.WriteLine("Valor de Pi: " + Pi.ToString("f2", CultureInfo.InvariantCulture));
+
+        }
+        // Não pode chamar uma função Statica dentro de uma classe statica, por isso criado a a função abixo fora !
+        static double Circunferencia(double r)
+        {
+            return 2 * Pi * r;
+        }
+        // ao criar a função statica, oque vai dentro do parentes a a variavel re recebera o valor de entraa no programa principal
+        static double Volume(double r)
+        {
+            return 4.0 / 3.0 * Pi * r * r * r;
+        }
+        static double Pi = 3.14;
+
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Solução 2
+
+Usando classe !!
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Course
+{
+    class Calculadora
+    {
+        public double Pi = 3.14;
+        public double Circunferencia(double r)
+        {
+            return 2 * Pi * r;
+        }
+        public double Volume(double r)
+        {
+            return 4.0 / 3.0 * Pi * r * r * r;
+        }
+
+    }
+}
+
+
+Programa Principal
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Calculadora calc;
+            calc = new Calculadora();
+
+            Console.WriteLine("ENTRE COM O VALOR DO RAIO:");
+            double raio = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double cir = calc.Circunferencia(raio);
+            double volume = calc.Volume(raio);
+
+            Console.WriteLine("Circunferencia: " + cir.ToString("f2", CultureInfo.InvariantCulture));
+            
+            Console.WriteLine("Volume: " + volume.ToString("f2", CultureInfo.InvariantCulture));
+            Console.WriteLine("Valor de Pi: " + calc.Pi.ToString("f2", CultureInfo.InvariantCulture));
+
+        }
+    }
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+Soolução 3
+
+Sem precisar Instanciar a classe Calculadora no progama Principal, só adicionar o prefixo Static nos metodos!!
+
+Classe:
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Course
+{
+    class Calculadora
+    {
+        // ao adicionar o prefixo static, permiti que possa chamar esses menbros sem precisar istancialos.
+        public static double Pi = 3.14;
+        public static double Circunferencia(double r)
+        {
+            return 2 * Pi * r;
+        }
+        public static double Volume(double r)
+        {
+            return 4.0 / 3.0 * Pi * r * r * r;
+        }
+
+    }
+}
+
+Programa Principal
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            
+
+            Console.WriteLine("ENTRE COM O VALOR DO RAIO:");
+            double raio = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double cir = Calculadora.Circunferencia(raio);
+            double volume = Calculadora.Volume(raio);
+
+            Console.WriteLine("Circunferencia: " + cir.ToString("f2", CultureInfo.InvariantCulture));
+            
+            Console.WriteLine("Volume: " + volume.ToString("f2", CultureInfo.InvariantCulture));
+            Console.WriteLine("Valor de Pi: " + Calculadora.Pi.ToString("f2", CultureInfo.InvariantCulture));
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

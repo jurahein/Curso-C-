@@ -1,0 +1,79 @@
+Exercicios C#
+
+1º EXERCICIO:
+Em seguida, usando os valores das variáveis, produza a
+seguinte saída na tela do console:
+Produtos:
+Computador, cujo preço é $ 2100,00
+Mesa de escritório, cujo preco é $ 650,50
+Registro: 30 anos de idade, código 5290 e gênero: M
+Medida com oito casas decimais: 53,23456700
+Arredondado (três casas decimais): 53,235
+Separador decimal invariant culture: 53.235
+
+resp:
+	    string produto1 = "Computador";
+            string produto2 = "Mesa de escritório";
+            byte idade = 30;
+            int codigo = 5290;
+            char genero = 'M';
+            double preco1 = 2100.0;
+            double preco2 = 650.50;
+            double medida = 53.234567;
+
+            Console.WriteLine("Produtos:");
+            Console.WriteLine($"{produto1}, cujo o preço é R$ {preco1} ");
+            Console.WriteLine($"{produto2}, cujo preço é R$ {preco2:f2}");
+            Console.WriteLine();
+            Console.WriteLine($"Registro: {idade} anos de idade, código {codigo} e genero: {genero}");
+            Console.WriteLine();
+            Console.WriteLine($"Medida com oito casas decimais: {medida:f8}");
+            Console.WriteLine($"Arrendondado (Três casas decimais): {medida:f3}");
+            Console.WriteLine("Separador decimal invariant culture: " + medida.ToString("f3", CultureInfo.InvariantCulture));
+
+
+2º EXERCICIO:
+	    
+Fazer um programa para executar a seguinte interação com o
+usuário, lendo os valores destacados em vermelho, e depois
+mostrar os dados na tela:
+Entre com seu nome completo:
+Alex Green
+Quantos quartos tem na sua casa?
+3
+Entre com o preço de um produto:
+500.50
+Entre seu último nome, idade e altura (mesma linha):
+Green 21 1.73
+
+SAÍDA ESPERADA (NÚMEROS REAIS
+COM DUAS CASAS DECIMAIS):
+Alex Green
+3
+500.50
+Green
+21
+1.73 
+
+
+	    Console.WriteLine("Entre com seu nome completo: ");
+            string nome = Console.ReadLine();
+            Console.WriteLine("Quantos quartos tem na sua casa ? ");
+            int quartos = int.Parse(Console.ReadLine());
+            Console.WriteLine("Entre com o preço de um produto: ");
+            double produto = double.Parse(Console.ReadLine());
+            Console.WriteLine("Digite seu ultimo nome, idade e altura ( na mesma linha) ");
+            string[] vet = Console.ReadLine().Split(' ');
+            string ultimonome = vet[0];
+            int idade2 = int.Parse(vet[1]);
+            double altura2 = double.Parse(vet[2]);
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("DADOS DIGITADOS:" );
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(nome);
+            Console.WriteLine(quartos);
+            Console.WriteLine(produto.ToString("f2", CultureInfo.InvariantCulture));
+            Console.WriteLine(ultimonome);
+            Console.WriteLine(idade2);
+            Console.WriteLine(altura2.ToString(CultureInfo.InvariantCulture));

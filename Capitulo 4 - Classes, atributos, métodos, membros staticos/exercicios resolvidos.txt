@@ -1,0 +1,363 @@
+EXERCÍCIO 01:
+Fazer um programa para ler os dados de duas pessoas, depois mostrar o nome da pessoa mais
+velha.
+
+
+    class Pessoa
+    {
+        public string Nome;
+        public int Idade;
+    }
+}
+
+
+	    Pessoa dados1, dados2;
+            dados1 = new Pessoa();
+            dados2 = new Pessoa();
+
+            Console.WriteLine("Digite os dados da 1º pessoa:");
+            Console.Write("Nome: ");
+            dados1.Nome = Console.ReadLine();
+            Console.Write("Idade: ");
+            dados1.Idade = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite os dados da 2º pessoa:");
+            Console.Write("Nome: ");
+            dados2.Nome = Console.ReadLine();
+            Console.Write("Idade: ");
+            dados2.Idade = int.Parse(Console.ReadLine());
+
+            if (dados1.Idade > dados2.Idade)
+            {
+                Console.WriteLine($"Pessoa mais velha: {dados1.Nome}");
+            }
+            else
+            {
+                Console.WriteLine($"Pessoa mais velha: {dados2.Nome}");
+            }
+
+-----------------------------------------------------------------------------------------------------------------
+
+EXERCÍCIO 02:
+Fazer um programa para ler nome e salário de dois funcionários. Depois, mostrar o salário
+médio dos funcionários.
+
+class Funcionarios
+    {
+       public string nome;
+       public double salario;
+        
+    }
+}
+
+
+	    Funcionarios d1, d2;
+            d1 = new Funcionarios();
+            d2 = new Funcionarios();
+
+            Console.WriteLine("Calculo Salario Médio");
+            Console.Write("Entre com o nome da 1º pessoa: ");
+            d1.nome = Console.ReadLine();
+            Console.WriteLine($"Digite o salario de {d1.nome}: ");
+            d1.salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            Console.Write("Entre com o nome da 2º pessoa: ");
+            d2.nome = Console.ReadLine();
+            Console.WriteLine($"Digite o salario de {d2.nome}: ");
+            d2.salario = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+            double media = (d1.salario + d2.salario) / 2;
+
+            Console.WriteLine("Salario médio de: " + media.ToString("f2", CultureInfo.InvariantCulture));
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+EXERCÍCIO 03:
+Fazer um programa para ler os valores da largura e altura de um retângulo. Em
+seguida, mostrar na tela o valor de sua área, perímetro e diagonal. Usar uma classe
+como mostrado no projeto ao lado.
+
+Classe:
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Retangulo
+    {
+        public double Largura;
+        public double Altura;
+
+        public double Area()
+        {
+            return Largura * Altura;
+        }
+
+        public double Perimetro()
+        {
+            return 2 + (Largura * Altura);
+        }
+        public double Diagonal()
+        {
+            return Math.Sqrt(Largura * Largura + Altura * Altura);
+        }
+
+        public override string ToString()
+        {
+            return "Area = " + Area().ToString("f2", CultureInfo.InvariantCulture) 
+                + "  Perimetro = " + Perimetro().ToString("f2", CultureInfo.InvariantCulture) 
+                + "  Diagonal = " + Diagonal().ToString("f2", CultureInfo.InvariantCulture);
+            
+        }
+
+
+    }
+}
+Programa Principal
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Retangulo ra;
+            ra = new Retangulo();
+            
+            
+            
+            Console.WriteLine("Calculos de um Retangulo");
+            Console.WriteLine();
+            Console.Write("Entre com a Largura do Triângulo: ");
+            ra.Largura = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.Write("Entre com a Altura do Triângulo: ");
+            ra.Altura = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            double area = ra.Area();
+            double areap = ra.Perimetro();
+            double aread = ra.Diagonal();
+            Console.WriteLine(ra);
+            
+
+
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------
+Exercicio 4
+Fazer um programa para ler os dados de um funcionário (nome,
+salário bruto e imposto). Em seguida, mostrar os dados do
+funcionário (nome e salário líquido). Em seguida, aumentar o salário
+do funcionário com base em uma porcentagem dada (somente o
+salário bruto é afetado pela porcentagem) e mostrar novamente os
+dados do funcionário. Use a classe projetada abaixo.
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+CLASSE:
+namespace Course
+{
+    class Funcionario
+    {
+        public string Nome;
+        public double SalarioBruto;
+        public double Imposto;
+
+        public double SalarioLiquido()
+        {
+            return SalarioBruto - Imposto;        
+        
+        }
+        public void AumentarSalario(double porcentagem)
+        {
+            SalarioBruto = SalarioBruto + (SalarioBruto * porcentagem / 100.0);
+        }
+
+        public override string ToString()
+        {
+            return "Funcionario: " + Nome + " , $ " + SalarioLiquido().ToString("f2", CultureInfo.InvariantCulture);
+        }
+    }
+}
+
+PROGRAMA PRINCIPAL
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Funcionario trabalhador;
+            trabalhador = new Funcionario();
+
+            Console.Write("Nome: ");
+            trabalhador.Nome = Console.ReadLine();
+            Console.Write("Salário Bruto: ");
+            trabalhador.SalarioBruto = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
+            Console.Write("Imposto: ");
+            trabalhador.Imposto = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            double salario = trabalhador.SalarioLiquido();
+            Console.WriteLine(trabalhador);
+            Console.WriteLine();
+            Console.Write("Digite a porcentagem para aumentar o salário: ");
+            double aumentar = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture); // criado a variavel aumentar para receber o valor escolhido de quanto será o aumento
+            trabalhador.AumentarSalario(aumentar); // atribuindo o metodo AumentarSalario para a variavel aumentar 
+            Console.WriteLine(trabalhador);
+
+
+            
+        
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------------------------
+EXERCICIO 5
+Fazer um programa para ler o nome de um aluno e as três notas que ele obteve nos três trimestres do ano
+(primeiro trimestre vale 30 e o segundo e terceiro valem 35 cada). Ao final, mostrar qual a nota final do aluno no
+ano. Dizer também se o aluno está APROVADO ou REPROVADO e, em caso negativo, quantos pontos faltam
+para o aluno obter o mínimo para ser aprovado (que é 60 pontos). Você deve criar uma classe Aluno para resolver
+este problema.
+
+CLASSE
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+namespace Course
+{
+    class Media
+    {
+        public string Nome;
+        public double N1;
+        public double N2;
+        public double N3;
+
+
+        public double MediaFinal()
+        {
+            return N1 + N2 + N3;
+        }
+
+        public override string ToString()
+        {
+            return "NOTA FINAL = " + MediaFinal().ToString("f2", CultureInfo.InvariantCulture);
+        }
+    }
+}
+
+
+using System;
+using System.Globalization;
+
+
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Media aluno;
+            aluno = new Media();
+
+            Console.Write("Nome do Aluno: ");
+            aluno.Nome = Console.ReadLine();
+
+            Console.WriteLine("Digite as Três Notas do aluno:");
+            aluno.N1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            aluno.N2 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            aluno.N3 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            double nfinal = aluno.MediaFinal();
+            double falta = 60 - nfinal;
+            Console.WriteLine(aluno);
+
+            if (nfinal >= 60)
+            {
+                Console.WriteLine("APROVADO");
+            }
+            else
+            {
+                Console.WriteLine("REPROVADO");
+                Console.WriteLine("Faltou = " + falta.ToString("f2", CultureInfo.InvariantCulture) + " Pontos!!" );
+            }
+
+
+
+
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------
+EXERCICIO 6
+
+Faça um programa para ler a cotação do dólar, e depois um valor em dólares a ser comprado por
+uma pessoa em reais. Informar quantos reais a pessoa vai pagar pelos dólares, considerando ainda
+que a pessoa terá que pagar 6% de IOF sobre o valor em dólar. Criar uma classe ConversorDeMoeda
+para ser responsável pelos cálculos.
+
+
+Classe:
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Dolar
+{
+    class ConversorDeMoeda
+    {
+        public static double Iof = 6.0;
+        public static double DolarParaReal(double quantia, double cotacao)
+        {
+            double total = quantia * cotacao;
+            return total + total * Iof / 100.0;
+        }
+    }
+}
+
+Programa Principal
+
+using System;
+using System.Globalization;
+
+namespace Dolar
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("Qual é a cotação do dólar? ");
+            double cotacao = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.WriteLine("Quantos dólares você vai comprar? ");
+            double comprar = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            double conversao = ConversorDeMoeda.DolarParaReal(cotacao, comprar);
+            Console.WriteLine("Valor a ser pago em reais =" + conversao.ToString("f2", CultureInfo.InvariantCulture));
+           
+        }
+    }
+}
+
+
+
+
+
+
+

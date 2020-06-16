@@ -1,0 +1,116 @@
+classe:
+
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
+using System.Globalization;
+
+namespace Banco
+{
+    class ContaBancaria
+    {
+        // Numro da conta não pode ser alterado
+        public int Numero{ get; private set; }
+        //Titular da conta pode ser alterado (Motivos: casamento, divorcio)
+        public string Titular { get; set; }
+        // O saldo só pderá ser alterado atráves dos métodos (Deposito ou Saque)
+        public double Saldo { get; private set; }
+
+        // Nos 2 Próximos Construtores abaixo, será utilizado no if, else do programa principal.
+        public ContaBancaria(int numero, string titular)
+        {
+            Numero = numero;
+            Titular = titular;
+            Saldo = 0.0;
+            
+        }
+        // Usando o "this" para aproveitar os atributos do construtor acima.
+
+        public ContaBancaria(int numero, string titular, double saldo) : this(numero, titular)
+        {
+            Saldo = saldo;
+        }
+
+        //Criando os Metodos (Deposito e Saldo)
+
+        // o void siginifica que não vai retornar uma saida, e sim alterar uma saida
+        public void Deposito(double quantia)
+        {
+            Saldo += quantia;
+        }
+
+        public void Saque(double quantia)
+        {
+            Saldo -= quantia;
+            Saldo -= 5.0;
+        }
+
+        // To string de saida no console
+        public override string ToString()
+        {
+            return "Conta " + Numero + ", Titular: " + Titular + ", Saldo: $ " + Saldo.ToString("f2", CultureInfo.InvariantCulture);
+        }
+    }
+}
+    
+Programa Principal
+
+using System;
+using System.Globalization;
+
+namespace Banco
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ContaBancaria conta;
+
+
+            Console.Write("Entre o número da conta: ");
+            int numero = int.Parse(Console.ReadLine());
+
+            Console.Write("Entre o titular da conta: ");
+            string titular = Console.ReadLine();
+
+            Console.Write("Haverá depósito inicial (s/n)? ");
+            char resp = char.Parse(Console.ReadLine());
+            if (resp == 's' || resp == 'S')
+            {
+                Console.WriteLine("Entre o valor de depósito inicial: ");
+                double depositoInicial = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                // Instanciado a conta com o construtor dentro do IF, por isso no inicio do código Declaramos só a conta "ContaBancaria conta;"
+                // As váriavei dentro deste construtor são a desse pograma principal acima.
+                conta = new ContaBancaria(numero, titular, depositoInicial);
+
+            }
+            else
+            {
+                // Por isso na classe ContaBancaria são criados 2 contrutores, uma para pegar o saldo no caso da consição acima, e outro deixando o saldo 0, caso a respota do usuario seja n
+                conta = new ContaBancaria(numero, titular);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Dados da Conta: ");
+            // trazendo o conta, retorna o tostring da classe ContaBancaria
+            Console.WriteLine(conta);
+
+            Console.WriteLine();
+            Console.Write("Entre um valor para depósito: ");
+            double quantia = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            conta.Deposito(quantia);
+            Console.WriteLine("Dados da conta atualizados:");
+            Console.WriteLine(conta);
+
+            Console.WriteLine();
+            Console.Write("Entre um valor para saque: ");
+            quantia = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            conta.Saque(quantia);
+            Console.WriteLine("Dados da conta atualizados:");
+            Console.WriteLine(conta);
+
+
+        }
+    }
+}

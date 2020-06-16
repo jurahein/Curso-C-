@@ -1,0 +1,371 @@
+Construtores
+
+Usando o exemplo da aplicação que adiciona e retira a quantidade de TVs.
+
+contrutores vc obriga o programa principal a passar paramtros!!
+
+adicionado após os menbros da classe:
+public Produto(string nome, double preco, int quantidade)
+        {
+            Nome = nome;
+            Preco = preco;
+            Quantidade = quantidade;
+        }
+
+E no programa principal só estancia quando tiver dado o input das informações, e criando variaveis novamente para atribuir
+
+Produto p = new Produto(nome, preco, quantidade);
+string nome
+double preco
+int quantidade
+
+
+
+EXEMPLO COMPLETO
+
+CLASSE:
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+namespace Course
+{
+    class Produto
+    {
+        public string Nome;
+        public double Preco;
+        public int Quantidade;
+
+        public Produto(string nome, double preco, int quantidade)
+        {
+            Nome = nome;
+            Preco = preco;
+            Quantidade = quantidade;
+        }
+
+        public double ValorTotalEmEstoque()
+        {
+            return Preco * Quantidade;
+        }
+
+        public void AdicionarProdutos(int quantidade)
+        {
+            Quantidade = Quantidade + quantidade;
+        }
+
+
+        public void RemoverProdutos(int quantidade)
+        {
+            Quantidade = Quantidade - quantidade;
+        }
+
+vb        public override string ToString()
+        {
+            return Nome + ", $ " + Preco.ToString("f2", CultureInfo.InvariantCulture) + ", " + Quantidade + " unidades, Total: $ " + ValorTotalEmEstoque().ToString("f2", CultureInfo.InvariantCulture);
+        }
+    }
+}
+
+
+Programa principal
+using System;
+using System.Globalization;
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+
+            
+            Console.WriteLine("Entre os dados do produto:");
+            Console.Write("Nome: ");
+            string nome = Console.ReadLine();
+            Console.Write("Preço: ");
+            double preco = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+            Console.Write("Quantidade no estoque: ");
+            int quantidade = int.Parse(Console.ReadLine());
+            Produto p = new Produto(nome, preco, quantidade);
+
+            Console.WriteLine();
+            Console.WriteLine("Dados do produto: " + p);
+            Console.WriteLine();
+            Console.Write("Digite o número de produtos a ser adicionado ao estoque: ");
+            int qte = int.Parse(Console.ReadLine());
+            p.AdicionarProdutos(qte);
+            Console.WriteLine();
+            Console.WriteLine("Dados atualizados: " + p);
+            Console.WriteLine();
+            Console.Write("Digite o número de produtos a ser removido do estoque: ");
+            qte = int.Parse(Console.ReadLine());
+            p.RemoverProdutos(qte);
+            Console.WriteLine();
+            Console.WriteLine("Dados atualizados: " + p);
+            
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sobrecarga
+
+Nada mais é do que criar mais de um contrutor porém mudando os atributos exemplo 
+
+public Produto (string nome, double preco)
+        {
+            Nome = nome;
+            Preco = preco;
+            Quantidade = 0;
+        }
+
+No exemplo acima, a quantidade de tv irá iniciar com 0
+se adicionar o trecho acima na classe, será possivel instancia tanto com 3 atributos tanto com 2 no programa principal.
+
+Produto p = new Produto(nome, preco);
+          ou
+Produto p = new Produto(nome, preco, quantidade);
+
+para etanciar somente a classe sem atributos Produto()
+é necessario adicionar a classe o contrutor vazio.
+
+  public Produto()
+        {
+
+        } 
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ENCAPSULAMENTO
+
+- Atributos tem que ser definidos como private
+- Implementa os métodos get (atribuir) e set (definir)
+- Intuito de deixar mais segur a aplicação (Código Fonte)
+- Nomenclatura dos atributos é iniciado com _letraminuscula (Não mais maiscula)
+Exemplo (Classe Produto):
+
+	private string _nome;
+        private double _preco;
+        private int _quantidade;
+
+public Produto(string nome, double preco, int quantidade)
+        {
+            _nome = nome;
+            _preco = preco;
+            _quantidade = quantidade;
+        }
+
+Pode ser também implementar lógica nos métodos da classe.
+Exemplo usando "if"
+
+ public void SetNome(string nome)
+        {
+            if (nome != null && nome.Length > 1)
+            _nome = nome;
+        }
+
+No IF acima ele só aceita o "_nome = nome" se ele não tiver vazio (nome != null) e tiver mais de um caractere (nome.Length > 1)
+
+Observação: Length é uma propiedade do string, server para verificar o tamanho de uma string.
+
+Para poder usar o atributoem private deve se declarar os metodos get ou set
+Exemplo
+
+ 	public string GetNome()
+        {
+            return _nome;
+        }
+	public double GetPreco()
+        {
+            return _preco;
+        }
+        public double GetQuantidade()
+        {
+            return _quantidade;
+        }
+
+Desta forma se os metodos estão criaos como get, você consegue imprimir o programa principal, mas não consegue alterar os valores, neste caso deve ser usado o "Set".
+Exemplo
+ 
+public double SetQuantidade()
+        {
+            return _quantidade;
+        }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Properties
+
+Uma properties é usada para facilitar na sintaxe deixando similar a de um atributo.
+
+Exemplo:
+Na classe Produto:
+
+Antes:
+	public string GetNome()
+        {
+            return _nome;
+        }
+
+
+	public void SetNome(string nome)
+        {
+            if (nome != null && nome.Length > 1)
+            _nome = nome;
+        }
+
+
+Desta maneira para chamar no programa principal
+Console.WriteLine(p.GetNome());
+p.SetNome = "TV4K"
+
+Com as Properties:
+
+Classe:	
+	public string Nome
+        {
+            get { return _nome; }
+            set {
+                if (value != null && value.Length > 1)
+                {
+                    _nome = value;
+                }
+            }
+        }
+
+
+Programa Principal:
+
+	p.Nome = "TV-LG";
+        Console.WriteLine(p.Nome);
+
+Facilitando na sintaxe.
+
+Outro exemplo agora com o metodo Preco:
+
+Antes:
+
+	public double GetPreco()
+        {
+            return _preco;
+        }
+
+Properties:
+public double Preco
+        {
+            get { return _preco; }
+        }
+
+No caso do Preco não usamos o metodo set, mas poderia usar.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Auto Properties
+
+Facilita mais ainda o desenvolvimento, pode ser definir os metodos get e set ja na criação dos atributos.
+
+Exemplo:
+
+Antes:
+	public string _nome;
+        public double _preco;
+        public int _quantidade;
+
+depois:
+	public string _nome;
+	public double Preco { get; private set;}
+        public int Quantidade { get; private set;}
+
+
+Exemplo:
+	public double Preco
+        {
+            get { return _preco; }
+        }
+ 
+É a mesma coisa que:
+	public double Preco { get; }
+
+
+
+No caso do atributo Nome como exite um if não tem como definir de forma automatica.
+Observação:
+digitar propi + tab + tab gera o atalho.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ordem sugerida para implementação de membros
+
+• Atributos privados
+• Propriedades autoimplementadas
+• Construtores
+• Propriedades customizadas
+• Outros métodos da classe
+
+Exemplo da nossa classe Produto()
+
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+namespace Course
+{
+    class Produto
+    {
+        private string _nome;
+        public double Preco { get; private set;}
+        public int Quantidade { get; private set;}
+
+        public Produto(string nome, double preco, int quantidade)
+        {
+            _nome = nome;
+            Preco = preco;
+            Quantidade = quantidade;
+        }
+
+
+        public string Nome
+        {
+            get { return _nome; }
+            set {
+                if (value != null && value.Length > 1)
+                {
+                    _nome = value;
+                }
+            }
+        }
+        
+        
+        
+        
+        public Produto()
+        {
+
+        } 
+
+        public double ValorTotalEmEstoque()
+        {
+            return Preco * Quantidade;
+        }
+
+        public void AdicionarProdutos(int quantidade)
+        {
+            Quantidade = Quantidade + quantidade;
+        }
+
+
+        public void RemoverProdutos(int quantidade)
+        {
+            Quantidade = Quantidade - quantidade;
+        }
+
+        public override string ToString()
+        {
+            return _nome + ", $ " + Preco.ToString("f2", CultureInfo.InvariantCulture) + ", " + Quantidade + " unidades, Total: $ " + ValorTotalEmEstoque().ToString("f2", CultureInfo.InvariantCulture);
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+

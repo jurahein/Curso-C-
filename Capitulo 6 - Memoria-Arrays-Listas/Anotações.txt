@@ -1,0 +1,703 @@
+Tipos referência vs. tipos valor
+
+Tipos referência = classes
+tipos valor = struct
+
+Como montar a Struct
+Adicione uma classe no projeto, altere o nome "classe" para "struct"
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Course
+{
+    struct Pint
+    {
+        public double X;
+        public double Y;
+
+        public override string ToString()
+        {
+            return "(" + X + ", " + Y + ")";
+        }
+    }
+}
+
+Programa principal
+
+using System;
+using System.Globalization;
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Pint p;
+            p.X = 10;
+            p.Y = 20;
+            Console.WriteLine(p);
+
+
+        }
+    }
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+Nullable
+
+É um recurso de C# para que dados de tipo valor (structs) possam
+receber o valor null.
+
+Exemplo:
+
+declarando assim da erro, pois double é do tipo alor e não aceita o null.
+
+errado
+double x = null;
+
+correto
+Nullable<double> x = null;
+
+ou de jeito simplificado colocando o "?" na frente do tipo da variavel.
+double? x = null;
+
+
+Métodos:
+• GetValueOrDefault
+• HasValue
+• Value (lança uma exceção se não houver valor)
+
+GetValueOrDefault() - trás o valor padrão definido na variavel
+
+	    double? x = null;
+            double? y = 10.0;
+            Console.WriteLine(x.GetValueOrDefault());
+            Console.WriteLine(y.GetValueOrDefault());
+
+saida:
+0
+10
+
+HasValue - trás se tem algum valor na variavel usando falso ou verdadeiro
+	    
+	    double? x = null;
+            double? y = 10.0;
+
+	    Console.WriteLine(x.HasValue);
+            Console.WriteLine(y.HasValue);
+
+
+saida:
+False
+True
+
+Value = verifica se tem valor, pode usar um if para verificar
+
+	    if (x.HasValue)
+                Console.WriteLine(x.Value);
+            else
+                Console.WriteLine("X is null");
+            if (y.HasValue)
+                Console.WriteLine(y.Value);
+            else
+                Console.WriteLine("Y is null");
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Operador de coalescência nula
+
+Exemplo:
+Neste caso na variavel "a" vou jogar o valor 5 caso ele seja nulo, no valor de b mesma coisa mas como não e nulo ele pega o valor atribuido "10"
+
+	    double? x = null;
+            double? y = 10;
+
+            double a = x ?? 5;
+            double b = y ?? 5;
+
+            Console.WriteLine(a);
+            Console.WriteLine(b);
+
+saida:
+5
+10
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Vetores
+
+Exemplo de como alocar valores por entrada em um vetor, e tirar a média.
+
+
+Fazer um programa para ler um número inteiro N e a altura de N pessoas.
+Armazene as N alturas em um vetor. Em seguida, mostrar a altura média dessas
+pessoas.
+
+
+using System;
+using System.Globalization;
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            double[] vect = new double[n];
+
+            // pecorrendo e preenchendo o vetor
+            for (int i = 0; i < n; i++)
+            // i começa com 0 e vai recebendo valor até chegar no valor de n (que foi definido por input)
+            {
+                vect[i] = double.Parse(Console.ReadLine(),CultureInfo.InvariantCulture);
+            }
+            double soma = 0.0;
+            // Este for é para pecorrer o vetor ja feito em cima, e acumular os valores digitados.
+            for (int i = 0; i < n; i++)
+            {
+             // soma recebe os valores do vetor (todos os valores digitados a cima)
+                soma += vect[i];
+            }
+            //Calculo para tirar a média dos valores digitados e alocado no vetor. (soma = todos valores somdos do vetor divido por n (valor da entrada do input))
+            double media = soma / n;
+            Console.WriteLine("AVERAGE HEIGHT = " + media.ToString("f2", CultureInfo.InvariantCulture));
+        }
+    }
+}
+
+
+
+
+Exemplo 2
+VETORES DO TIPO REFERÊNCIA
+
+
+Fazer um programa para ler um número inteiro N e os dados (nome e
+preço) de N Produtos. Armazene os N produtos em um vetor. Em
+seguida, mostrar o preço médio dos produtos.
+
+Classe
+
+namespace Course
+{
+    class Produto
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
+    }
+}
+
+PROGRAMA PRINCIPAL
+
+using System;
+using System.Globalization;
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+
+            Produto[] vect = new Produto[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                // fazendo a entrada de dados (digitados pelo usuario)
+                string name = Console.ReadLine();
+                double price = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                // Sintaxe de estanciação automatica, sem construtores
+                // vetor recebendo os dados digitados
+                vect[i] = new Produto { Name = name, Price = price };
+            }
+            double soma = 0.0;
+            for (int i = 0; i < n; i++)
+            {
+                soma += vect[i].Price;
+            }
+
+            double media = soma / n;
+            Console.WriteLine("AVERAGE PRICE = " + media.ToString("f2", CultureInfo.InvariantCulture));
+        }
+    }
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Modificador params
+
+Ajuda no caso de não ficar criando varias sobrecargas, simplifica.
+
+Classe:
+
+		namespace Course {
+		class Calculator {
+		public static int Sum(int[] numbers) {
+		int sum = 0;
+		for (int i=0; i<numbers.Length; i++) {
+		sum += numbers[i];
+		}
+		return sum;
+		}
+		}
+		}
+
+
+Programa Principal
+
+	    int result = Calculator.Sum(new int[] { 10, 1000 });
+            Console.WriteLine(result);
+
+
+Usando  Modificador Params:
+
+Classe:
+
+		namespace Course {
+		class Calculator {
+		public static int Sum(params int[] numbers) {
+		int sum = 0;
+		for (int i=0; i<numbers.Length; i++) {
+		sum += numbers[i];
+		}
+		return sum;
+		}
+		}
+		}
+
+Programa Principal:
+Apena colocar os valores entre parenteses ()
+
+	    int result = Calculator.Sum(10,1000);
+            Console.WriteLine(result);
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Modificador de parâmetros: ref e
+out
+
+criando uma função para triplicar um valor:
+
+jeito que não funciona:
+
+classe:
+
+class Calculator {
+public static void Triple(int x) {
+x = x * 3;
+}
+}
+
+Programa Principal
+
+class Program {
+static void Main(string[] args) {
+int a = 10;
+Calculator.Triple(a);
+Console.WriteLine(a);
+
+deste jeito não alterará o valor de "a"
+
+NECESSÁRIO USAR O MODIFICADOR REF
+
+classe:
+
+class Calculator {
+public static void Triple(ref int x) {
+x = x * 3;
+}
+}
+
+Programa Principal
+
+class Program {
+static void Main(string[] args) {
+int a = 10;
+Calculator.Triple(ref a);
+Console.WriteLine(a);
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+laço foreach
+
+using System;
+using System.Globalization;
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] vect = new string[] { "Juraci", "Lygia", "Juca" };
+            
+            //Pra cada String "obj" que contém no meu vetor, vou imprimir o elemento obj
+            foreach (string obj in vect)
+            {
+                Console.WriteLine(obj);
+            }
+        }
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Listas Parte 1
+
+ 	    // Declarando uma lista e estanciando na mesma linha
+            List<string> list = new List<string>();
+            // Declarando uma lista e estanciando na mesma linha e adicionando valores a lista
+            List<string> list2 = new List<string>{"Juraci", "Lygia"};
+
+
+
+
+Listas Parte 2
+
+Adicionando valores strings na lista e mostrando na tela:
+
+ 	    List<string>  List = new List<string>();
+            List.Add("Juraci");
+            List.Add("Anna");
+            List.Add("Zica");
+            List.Add("Juca");
+	    List.Insert(2, "Marco");
+
+            foreach (string elementos in List)
+            {
+                Console.WriteLine(elementos);
+		
+            }
+	    Console.WriteLine(List.Count);
+
+	    //Forma resumida "Expressão Lambda" achar um nome na lista que começa com A
+            string s1 = List.Find(x => x[0] == 'A');
+            Console.WriteLine("First 'A' = " + s1);
+
+	    string s2 = List.FindLast(x => x[0] == 'A');
+            Console.WriteLine("Last 'A' = " + s2);
+
+       	    int posicao1 = List.FindIndex(x => x[0] == 'A');
+            Console.WriteLine("First Position 'A' " + posicao1);
+
+            int posicao2 = List.FindLastIndex(x => x[0] == 'A');
+            Console.WriteLine("Last Position 'A' " + posicao2);
+
+
+	    // FindAll vc cria uma lista secundaria e armazena nesta lista os valores definidos no FindAll, no caso todos os nomes que contém 5 caracteres
+            List<string> list2 = List.FindAll(x => x.Length == 5);
+
+            //Usando o foreach para mostrar o resultado.
+            foreach (string elemento in list2)
+            {
+                Console.WriteLine(elemento);
+            }
+		
+	    List.Remove("Anna");
+            Console.WriteLine("---------------------");
+            foreach (string elemento in List)
+            {
+                Console.WriteLine(elemento);
+            }
+
+	    List.RemoveAll(x => x[0] == 'A');
+
+            foreach (string elemento in List)
+            {
+                Console.WriteLine(elemento);
+            }
+
+
+
+
+Add = adiciona o valor ao final da lista
+Insert = Escolhe a posição;
+Count = Conta quantos valores te na lista
+Find = Achar alum valor que vc definiu na lista
+FinfLast = Ultima vez que o nome começou com A na lista
+FindIndex = Acha a primeira posição que um valor começou com A
+FindLastIndex = Acha a ultima posição que um valor começou com A
+FindAll = cria uma outra lista e joga os elementos buscados nesta nova lista. 
+Remove = Remove um eloemento da lista.
+RemoveAll = Remove tudo que for definido no ()
+RemoveAt = Remove por pocição.
+RemoveRange = Remove os elemntos de uma faixa, é esperado uma posição e depois uma contagem, EXEMPLO: -- List.RemoveRange(2. 2) irá remoer da posição 2 na lista, 2 nomes. 
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Matrizes
+
+ 	    // declarando uma matriz "double[,] matriz" e estanciando "matriz = new double[2, 3];"
+            // [,] Indica que é indica que é arranjo bidimensional, terá linhas e colunas
+            //[2, 3] indica quantas linhas e colunas, 2 linhas e 2 colunas
+            double[,] matriz = new double[2, 3];
+
+            // quantos elementos tem na matriz
+            Console.WriteLine(matriz.Length);
+            // quanto é a primeira dimensão da matriz, ou seja quantidade de linhas
+            Console.WriteLine(matriz.Rank);
+            //traz o resultado de linhas e colunas declarado quando estancia.
+            Console.WriteLine(matriz.GetLength(2));
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Fixação "MATRIZ"
+Fazer um programa para ler um número inteiro N e uma matriz de
+ordem N contendo números inteiros. Em seguida, mostrar a diagonal
+principal e a quantidade de valores negativos da matriz.
+
+
+using System;
+
+namespace ExMatriz
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            // matriz criada a partir do input
+            int[,] matriz = new int[n, n];
+
+            // for para pecorrer as linhas da matriz
+            for (int i = 0; i < n; i++)
+            {
+
+                // neste input dentro do primeiro for, estamos criando UM VETOR e jogando o input dentro dele, usando o Split para recortar. valores digitados "5 -3 10"
+                // o primeir for roda esse input por 3 vezes, é o valor de N digitado no começo
+                string[] valores = Console.ReadLine().Split(' ');
+
+                // for dentro do for serve para pecorrer as colunas da matriz
+                for (int j = 0; j < n; j++)
+                {
+                    // neste trecho convertemos os valores em string do vetor criado (valores) e adicionamos na matriz.
+                    matriz[i, j] = int.Parse(valores[j]);
+                }
+            }
+            //mostrando a diagonal principal que é as posições da matriz 0 e 0, 1 e 1, 2 e 2 
+            Console.WriteLine("diagonal principal ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine(matriz[i,i] + " ");
+            }
+            Console.WriteLine();
+
+            //contando quantos numeros negativos tem na matriz
+
+            // criando uma variavel para ser um contador
+            int contagem = 0;
+
+            
+            // estrutura basica para pecorrer uma matriz inteira, linha e coluna, onde n é linha e coluna(declarado no começo int[,] matriz = new int[n, n];)
+            // usou um if para vericiar qual numero é negativo "< 0 e fez a contagem pela variavel criada. "
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (matriz[i, j] < 0)
+                    {
+                        contagem++;
+                    }
+                }
+            }
+            Console.WriteLine("Numeros Negativos " + contagem);
+        }
+
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Fixação 2
+
+Fazer um programa para ler dois números inteiros M e N, e depois ler
+uma matriz de M linhas por N colunas contendo números inteiros,
+podendo haver repetições. Em seguida, ler um número inteiro X que
+pertence à matriz. Para cada ocorrência de X, mostrar os valores à
+esquerda, acima, à direita e abaixo de X, quando houver, conforme
+exemplo.
+
+using System;
+
+
+
+namespace Course {
+
+    class Program {
+
+        static void Main(string[] args) {
+
+
+
+            string[] line = Console.ReadLine().Split(' ');
+
+            int m = int.Parse(line[0]);
+
+            int n = int.Parse(line[1]);
+
+
+
+            int[,] mat = new int[m,n];
+
+
+
+            for (int i = 0; i < m; i++) {
+
+                string[] values = Console.ReadLine().Split(' ');
+
+                for (int j = 0; j < n; j++) {
+
+                    mat[i, j] = int.Parse(values[j]);
+
+                }
+
+            }
+
+
+
+            int x = int.Parse(Console.ReadLine());
+
+
+
+            for (int i = 0; i < m; i++) {
+
+                for (int j = 0; j < n; j++) {
+
+                    if (mat[i, j] == x) {
+
+                        Console.WriteLine("Position " + i + "," + j + ":");
+
+                        if (j > 0) {
+
+                            Console.WriteLine("Left: " + mat[i, j - 1]);
+
+                        }
+
+                        if (i > 0) {
+
+                            Console.WriteLine("Up: " + mat[i - 1, j]);
+
+                        }
+
+                        if (j < n - 1) {
+
+                            Console.WriteLine("Right: " + mat[i, j + 1]);
+
+                        }
+
+                        if (i < m - 1) {
+
+                            Console.WriteLine("Down: " + mat[i + 1, j]);
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Conjunto
+
+Classe HashSet
+
+using System;
+using System.Globalization;
+using System.Collections.Generic;
+    
+namespace Course
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // conjunto não aceita repetição, ou seja um numero ja add não pode ser add novamente.
+
+            // declarando um conjunto e estanciando
+            HashSet<int> a = new HashSet<int>();
+            HashSet<int> b = new HashSet<int>();
+
+            a.Add(3);
+            a.Add(5);
+            a.Add(8);
+            a.Add(9);
+
+            b.Add(3);
+            b.Add(4);
+            b.Add(5);
+            b.Remove(4);
+
+            foreach (int  elemento in a)
+            {
+                Console.WriteLine(elemento);
+            }
+
+            foreach (int elemento in b)
+            {
+                Console.WriteLine(elemento);
+            }
+
+            // verificando se um numero digitado contém no cojunto a, usando o contains
+
+            Console.WriteLine("digite um valor inteiro: ");
+            int valor = int.Parse(Console.ReadLine());
+
+            if (a.Contains(valor))
+            {
+                Console.WriteLine("pertence ao cojunto A ");
+            }
+            else
+            {
+                Console.WriteLine("Não pertence ao cojunto A ");
+            }
+
+            
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
