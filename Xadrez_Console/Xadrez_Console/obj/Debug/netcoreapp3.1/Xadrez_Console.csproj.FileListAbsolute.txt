@@ -1,0 +1,13 @@
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\bin\Debug\netcoreapp3.1\Xadrez_Console.exe
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\bin\Debug\netcoreapp3.1\Xadrez_Console.deps.json
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\bin\Debug\netcoreapp3.1\Xadrez_Console.runtimeconfig.json
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\bin\Debug\netcoreapp3.1\Xadrez_Console.runtimeconfig.dev.json
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\bin\Debug\netcoreapp3.1\Xadrez_Console.dll
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\bin\Debug\netcoreapp3.1\Xadrez_Console.pdb
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.csprojAssemblyReference.cache
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.csproj.CoreCompileInputs.cache
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.AssemblyInfoInputs.cache
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.AssemblyInfo.cs
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.dll
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.pdb
+C:\Users\juraci\Desktop\Projeto Xadrez Console\Xadrez_Console\Xadrez_Console\obj\Debug\netcoreapp3.1\Xadrez_Console.genruntimeconfig.cache
